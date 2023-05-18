@@ -1,23 +1,36 @@
-import logo from './logo.svg';
+import React, { useState } from 'react';
 import './App.css';
+import Tab from './components/tab';
+import TabMaker from './components/tabMaker';
+import TabContent from './components/tabContent';
+
 
 function App() {
+  const [tabs, setTabs] = useState([]);
+  const [content, setContent] = useState("");
+
+  const TabPasser = (newTab) => {
+    setTabs([...tabs, newTab]);
+    console.log("New Tab: ", newTab);
+  }
+  const clickedTab = (tab) => {
+    setContent(tab);
+    console.log("Content: ", content);
+  }
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <TabMaker
+        addTab={TabPasser}
+
+      />
+      <Tab
+        tabs={tabs}
+        tabContent={clickedTab}
+      />
+      < TabContent
+        content={content}
+      />
     </div>
   );
 }
